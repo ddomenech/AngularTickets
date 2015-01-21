@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+AUTH_PROFILE_MODULE = 'tickets.users'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -64,16 +65,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-##DATABASES = {
-#    'default': {
-#        'ENGINE' : 'firebird',
-#        'NAME' : os.path.join(BASE_DIR,'ANGULAR_TICKETS.FDB'),#os.path.join(BASE_DIR, 'ANGULAR_TICKETS.FDB'), # Path to database or db alias
-#        'USER' : 'sysdba',           # Your db user
-#        'PASSWORD' : 'masterkey',    # db user password
-#        'HOST' : '127.0.0.1',        # Your host machine
-#        'PORT' : '3050',             # If is empty, use default 3050
-#        #'OPTIONS' : {'charset':'ISO8859_1'}
-#    }
 }
 
 # Internationalization

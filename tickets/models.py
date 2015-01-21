@@ -1,16 +1,17 @@
 from django.db import models
-from django.utils import timezone
+from datetime import datetime
+from django.contrib.auth.models import User
 # Create your models here.
 
-class users(models.Model):
-    user_name = models.TextField(max_length=200)
-    password = models.CharField(max_length=50)
-    avatar = models.ImageField(upload_to="%Y/%m/%d", blank=True)
-    email = models.EmailField()
+def x_file_name(instance, filename):
+    return '/'.join(['imagenes', instance.user.username, filename])
+
+class user(models.Model):
+    user = models.ForeignKey(User,unique=True)
+    avatar = models.ImageField(upload_to=x_file_name, default="/imagenes/avatar.png", blank=True)
     
-    
-class tickets(models.Model):
-    usuario_id = models.ForeignKey('users')
+class ticket(models.Model):
+    usuario_id = models.ForeignKey('user')
     motivo = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=400)
     imagen = models.ImageField(upload_to="%Y/%m/%d", blank=True)
@@ -24,7 +25,7 @@ class tickets(models.Model):
         ('C', 'CERRADO')
     )
     estado = models.CharField(max_length=1, choices=estado_opciones, default='A')
-    fecha_creacion = models.DateTimeField(default=timezone.now)
+    fecha_creacion = models.DateTimeField(default=datetime.now)
     
 '''
 1 - La base de datos tienen nombres en plural, en este caso la tabla la llamaría tickets y usuarios.
