@@ -6,12 +6,12 @@ from django.contrib.auth.models import User
 def x_file_name(instance, filename):
     return '/'.join(['imagenes', instance.user.username, filename])
 
-class user(models.Model):
+class users(models.Model):
     user = models.ForeignKey(User,unique=True)
     avatar = models.ImageField(upload_to=x_file_name, default="/imagenes/avatar.png", blank=True)
     
-class ticket(models.Model):
-    usuario_id = models.ForeignKey('user')
+class tickets(models.Model):
+    usuario_id = models.ForeignKey('users')
     motivo = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=400)
     imagen = models.ImageField(upload_to="%Y/%m/%d", blank=True)
