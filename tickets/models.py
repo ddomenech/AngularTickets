@@ -3,9 +3,6 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 
-def x_file_name(instance, filename):
-    return '/'.join(['imagenes', instance.user.username, filename])
-
 class users(models.Model):
     user = models.ForeignKey(User,unique=True)
     avatar = models.ImageField(upload_to=x_file_name, default="/imagenes/avatar.png", blank=True)
