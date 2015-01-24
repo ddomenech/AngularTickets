@@ -1,7 +1,7 @@
+# -*- encoding: utf-8 -*-
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
-# Create your models here.
 
 def x_file_name(instance, filename):
     return '/'.join(['imagenes', instance.user.username, filename])
@@ -26,16 +26,5 @@ class tickets(models.Model):
     )
     estado = models.CharField(max_length=1, choices=estado_opciones, default='A')
     fecha_creacion = models.DateTimeField(default=datetime.now)
-    
-'''
-1 - La base de datos tienen nombres en plural, en este caso la tabla la llamaría tickets y usuarios.
-2 - Siempre tiene un id que es único y autonumérico.
-3 - El id siempre empieza por id_ y el nombre de la base de datos en singular, en este caso sería id_ticket
-4 - Las claves foraneas siempre las identifico con el nombre de la base de datos relacionada en singular más el _id, en este caso para la tabla tickets habría una clave foranea de la tabla usuarios y se llamaría usuario_id, otro caso en TicketPadre yo lo llamaría ticket_padre_id.
-5 - Los nombre de las tablas y de los campos siempre están en minúsculas para evitar problemas en sistemas unix.
-6 - Siempre que el nombre de la tabla o del campo se componga de dos palabras irán separados por un guión bajo, por ejemplo para el campo Fecha_Creacion yo lo llamaría fecha_creacion.
-
-Tabla de Tickets: Tickets_ID - UsuarioID - Motivo - Descripcion - Img - Prioridad ( ALTA-BAJA-MEDIA)- TicketPadre (RECURSIVIDAD) - ESTADO (ABIERTO-CERRADO) - Fecha_Creacion
-
-Tabla Usuarios: UserID - UserName - Passwoord - Avatar - Email
-'''
+    def __unicode__(self):
+        return self.motivo
