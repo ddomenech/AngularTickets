@@ -3,6 +3,9 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 
+def x_file_name(instance, filename):
+    return '/'.join(['imagenes', instance.user.username, filename])
+ 
 class users(models.Model):
     user = models.ForeignKey(User,unique=True)
     avatar = models.ImageField(upload_to=x_file_name, default="/imagenes/avatar.png", blank=True)
@@ -25,3 +28,15 @@ class tickets(models.Model):
     fecha_creacion = models.DateTimeField(default=datetime.now)
     def __unicode__(self):
         return self.motivo
+
+class respuestas(models.Model):
+    usuario_id = models.ForeignKey('users')
+    ticket_id = models.ForeignKey('tickets',null=False)
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField(max_length=500)
+    imagen = models.ImageField(upload_to="%Y/%m/%d", blank=True)
+    fecha_creacion = models.DateTimeField(default=datetime.now)
+    def __unicode__(self):
+        return self.titulo
+
+
