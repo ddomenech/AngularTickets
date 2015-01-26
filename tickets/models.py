@@ -9,7 +9,9 @@ def x_file_name(instance, filename):
 class users(models.Model):
     user = models.ForeignKey(User,unique=True)
     avatar = models.ImageField(upload_to=x_file_name, default="/imagenes/avatar.png", blank=True)
-    
+    def __unicode__(self):
+        return self.user.username
+
 class tickets(models.Model):
     usuario_id = models.ForeignKey('users')
     motivo = models.CharField(max_length=100)
