@@ -1,1 +1,9 @@
-*.sqlite3
+*.db
+*.pyc
+*~
+.*
+env
+*.jpg
+# Accept these files in the repository
+!.gitignore
+!.travis.yml
