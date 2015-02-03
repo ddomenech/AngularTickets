@@ -28,7 +28,7 @@ class UsersSerializers(serializers.ModelSerializer):
         fields = ('avatar',)
             
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    profile = UsersSerializers()
+    profile = UsersSerializers(required=False)
     class Meta:
         model = User
         fields = ('url', 'username', 'usertickets', 'userrespuestas', 'profile')

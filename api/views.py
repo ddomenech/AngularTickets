@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from tickets.models import tickets, users, respuestas
-from api.permissions import IsOwnerOrReadOnly
+from api.permissions import IsOwnerOrReadOnly, IsOwnerOrReadOnlyUsers
 from api.serializers import TicketSerializer, UserSerializer, RespuestaSerializer
 
 
@@ -35,8 +35,13 @@ class RespuestaViewSet(viewsets.ModelViewSet):
     def pre_save(self, obj):
         obj.usuario_id = self.request.user    
     
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (IsOwnerOrReadOnlyUsers,)
+    
+    def post_save(self, obj, created):
+        profile = users(user=obj)
+        profile.save()
 
 # Create your views here.
