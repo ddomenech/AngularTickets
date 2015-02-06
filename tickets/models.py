@@ -7,7 +7,7 @@ def x_file_name(instance, filename):
     return '/'.join(['imagenes', instance.user.username, filename])
  
 class users(models.Model):
-    user = models.OneToOneField(User,unique=True, related_name='profile')
+    user = models.ForeignKey(User,unique=True, related_name='profile')
     avatar = models.ImageField(upload_to=x_file_name, default="/imagenes/avatar.png", blank=True)
     def __unicode__(self):
         return self.user.username

@@ -4,6 +4,17 @@
 .*
 env
 *.jpg
+node_modules
+dist
+.tmp
+bower_components
+gulpfile.js
+*debug*
+package.json
+imagenes
+bower*
+
 # Accept these files in the repository
 !.gitignore
 !.travis.yml
+
