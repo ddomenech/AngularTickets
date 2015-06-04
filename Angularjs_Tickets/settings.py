@@ -56,7 +56,6 @@ ROOT_URLCONF = 'Angularjs_Tickets.urls'
 
 WSGI_APPLICATION = 'Angularjs_Tickets.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
@@ -139,5 +138,13 @@ LOGGING = {
 
 REST_FRAMEWORK = {
     'PAGINATE_BY': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    )
 }
 
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
